@@ -69,14 +69,29 @@ def overflowlimit(bytes,limit):
     if bytes>limit:
         return True
     return False
+def getContainerStats(news):
+    print 'procesStats'
+    ipbytes = map(lambda item: (item[0],json.loads(item[1])),news)
+    print 'ipbytes1=',ipbytes
+#    ipbytes1 = map(lambda item: item["rx_bytes"],ipbytes)
+#    print 'ipbytes1=',ipbytes1
+    retv = map(lambda item: (item[0][13:-8],item[1]["rx_bytes"],item[1]["tx_bytes"]),ipbytes)   
+    print "container rex_bytes ,txbyteps =",retv
+
+    return retv
 def processStats(news,limit):
     print 'procesStats'
     ipbytes = map(lambda item: (item[0],json.loads(item[1])),news)
-    print 'ipbytes=',ipbytes
+    print 'ipbytes1=',ipbytes
 #    ipbytes1 = map(lambda item: item["rx_bytes"],ipbytes)
 #    print 'ipbytes1=',ipbytes1
+    retv = map(lambda item: (item[0][13:-8],item[1]["rx_bytes"],item[1]["tx_bytes"]),ipbytes)   
+    print "container rex_bytes ,txbyteps =",retv
+
+#    foreach(lambda item: len(item),retv)
     retv = filter(lambda item: overflowlimit(item[1]["rx_bytes"]+item[1]["tx_bytes"],limit),ipbytes)   
     print "container=",retv
+    
 if __name__ == '__main__':
     r= getRedis()
 #    putRedisData(r)
