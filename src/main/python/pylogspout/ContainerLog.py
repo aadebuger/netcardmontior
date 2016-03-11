@@ -11,7 +11,11 @@ def logContainer():
     cli = Client(base_url=DOCKER_HOST)
     print('cli',cli)
     cli.images()
-    for line in cli.logs("mongodb0", stderr=False, stream=True).readlines():
-        print 'line=',line
+    line=""
+    for c in cli.logs("mongodb0", stderr=False, stream=True):
+        line=line+c
+        if c=='\n':
+            print 'line=',line
+            line=""
 if __name__ == '__main__':
     logContainer()
