@@ -2,4 +2,4 @@ From  python:2.7
 run pip install docker-py
 add src/main/python /code
 workdir /code
-CMD ["python","pylogspout/ContainerLog"]
+CMD ["python","pylogspout/ContainerLog.py"]
