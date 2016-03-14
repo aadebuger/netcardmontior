@@ -1,0 +1,4 @@
+From ubuntu
+add src/main/python /code
+workdir /code
+CMD ["python","pylogsput.ContainerLog"]
